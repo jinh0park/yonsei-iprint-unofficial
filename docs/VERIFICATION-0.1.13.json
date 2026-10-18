@@ -1,0 +1,181 @@
+{
+  "version": "0.1.13",
+  "date": "2026-10-18",
+  "school_network_contacted": false,
+  "real_job_deletion_performed": false,
+  "school_queue_interoperability_verified": false,
+  "queue_protocol_cases": {
+    "passed": true,
+    "school_network_contacted": false,
+    "synthetic_only": true,
+    "cases": [
+      {
+        "case": "list",
+        "passed": true,
+        "queries": 1,
+        "delete_commands": 0,
+        "job_ids_sent": 0
+      },
+      {
+        "case": "empty",
+        "passed": true,
+        "queries": 1,
+        "delete_commands": 0,
+        "job_ids_sent": 0
+      },
+      {
+        "case": "delete",
+        "passed": true,
+        "queries": 3,
+        "delete_commands": 1,
+        "job_ids_sent": 1
+      },
+      {
+        "case": "auth-denied",
+        "passed": true,
+        "queries": 0,
+        "delete_commands": 0,
+        "job_ids_sent": 0
+      },
+      {
+        "case": "query-denied",
+        "passed": true,
+        "queries": 1,
+        "delete_commands": 0,
+        "job_ids_sent": 0
+      },
+      {
+        "case": "stale",
+        "passed": true,
+        "queries": 2,
+        "delete_commands": 0,
+        "job_ids_sent": 0
+      },
+      {
+        "case": "changed",
+        "passed": true,
+        "queries": 2,
+        "delete_commands": 0,
+        "job_ids_sent": 0
+      },
+      {
+        "case": "delete-denied",
+        "passed": true,
+        "queries": 2,
+        "delete_commands": 1,
+        "job_ids_sent": 0
+      },
+      {
+        "case": "still-listed",
+        "passed": true,
+        "queries": 3,
+        "delete_commands": 1,
+        "job_ids_sent": 1
+      },
+      {
+        "case": "post-query-dropped",
+        "passed": true,
+        "queries": 3,
+        "delete_commands": 1,
+        "job_ids_sent": 1
+      },
+      {
+        "case": "truncated",
+        "passed": true,
+        "queries": 1,
+        "delete_commands": 0,
+        "job_ids_sent": 0
+      },
+      {
+        "case": "malformed",
+        "passed": true,
+        "queries": 1,
+        "delete_commands": 0,
+        "job_ids_sent": 0
+      },
+      {
+        "case": "duplicate",
+        "passed": true,
+        "queries": 1,
+        "delete_commands": 0,
+        "job_ids_sent": 0
+      },
+      {
+        "case": "command-injection",
+        "passed": true,
+        "queries": 1,
+        "delete_commands": 0,
+        "job_ids_sent": 0
+      },
+      {
+        "case": "negative-id",
+        "passed": true,
+        "queries": 1,
+        "delete_commands": 0,
+        "job_ids_sent": 0
+      },
+      {
+        "case": "bad-pages",
+        "passed": true,
+        "queries": 1,
+        "delete_commands": 0,
+        "job_ids_sent": 0
+      },
+      {
+        "case": "oversized",
+        "passed": true,
+        "queries": 1,
+        "delete_commands": 0,
+        "job_ids_sent": 0
+      },
+      {
+        "case": "large-list",
+        "passed": true,
+        "queries": 1,
+        "delete_commands": 0,
+        "job_ids_sent": 0
+      },
+      {
+        "case": "quoted-separator",
+        "passed": true,
+        "queries": 1,
+        "delete_commands": 0,
+        "job_ids_sent": 0
+      },
+      {
+        "case": "legacy-seven-fields",
+        "passed": true,
+        "queries": 1,
+        "delete_commands": 0,
+        "job_ids_sent": 0
+      }
+    ]
+  },
+  "regression_protocol_cases": 21,
+  "original_request_comparison": {
+    "original_x86_executed": true,
+    "network": false,
+    "vectors": [
+      {
+        "user_bytes": 10,
+        "record_bytes": 57,
+        "byte_identical": true
+      },
+      {
+        "user_bytes": 6,
+        "record_bytes": 57,
+        "byte_identical": true
+      },
+      {
+        "user_bytes": 25,
+        "record_bytes": 57,
+        "byte_identical": true
+      }
+    ]
+  },
+  "ui_checks": 8,
+  "native_build_verified": true,
+  "runtime_ghostscript_unchanged_from_0_1_12": true,
+  "physical_simplex_print_verified_in_prior_versions": true,
+  "physical_duplex_and_multiple_copy_billing_verified": false
+}

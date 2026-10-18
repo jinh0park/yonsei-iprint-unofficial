@@ -1,0 +1,8 @@
+{
+  "version": "0.1.14",
+  "change": "Unofficial name in Finder, Info.plist, window title and app menu",
+  "protocol_and_print_handlers_changed": false,
+  "previous_protocol_validation": "VERIFICATION-0.1.13.json",
+  "school_queue_interoperability_verified": false,
+  "school_network_contacted": false
+}

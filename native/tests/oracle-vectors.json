@@ -1,0 +1,91 @@
+{
+  "original_x86_routines_executed": true,
+  "network": false,
+  "synthetic_inputs_only": true,
+  "vectors": [
+    {
+      "input_hex": "",
+      "sha1": "DA39A3EE5E6B4B0D3255BFEF95601890AFD80709",
+      "type6": "ZGEzOWEzZWU1ZTZiNGIwZDMyNTViZmVmOTU2MDE4OTBhZmQ4MDcwOQ=="
+    },
+    {
+      "input_hex": "616263",
+      "sha1": "A9993E364706816ABA3E25717850C26C9CD0D89D",
+      "type6": "YTk5OTNlMzY0NzA2ODE2YWJhM2UyNTcxNzg1MGMyNmM5Y2QwZDg5ZA=="
+    },
+    {
+      "input_hex": "4e61746976652d546573742d3137",
+      "sha1": "BADBE5F1CC33171F551F8A064FC3A564A0E78155",
+      "type6": "YmFkYmU1ZjFjYzMzMTcxZjU1MWY4YTA2NGZjM2E1NjRhMGU3ODE1NQ=="
+    },
+    {
+      "input_hex": "58585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858",
+      "sha1": "0933B39D2700DA6111D6B99E31EB2C46BB834595",
+      "type6": "MDkzM2IzOWQyNzAwZGE2MTExZDZiOTllMzFlYjJjNDZiYjgzNDU5NQ=="
+    },
+    {
+      "input_hex": "5858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858",
+      "sha1": "7DAFC92D75212E71F587780F0C0166ADC5BB9FAB",
+      "type6": "N2RhZmM5MmQ3NTIxMmU3MWY1ODc3ODBmMGMwMTY2YWRjNWJiOWZhYg=="
+    },
+    {
+      "input_hex": "58585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858",
+      "sha1": "DAC23C1366DD53B62D93FCC4B63633E6D52F1C4C",
+      "type6": "ZGFjMjNjMTM2NmRkNTNiNjJkOTNmY2M0YjYzNjMzZTZkNTJmMWM0Yw=="
+    },
+    {
+      "input_hex": "585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858",
+      "sha1": "4C062254E77D49BB1D139D82E8448217F9AF1C31",
+      "type6": "NGMwNjIyNTRlNzdkNDliYjFkMTM5ZDgyZTg0NDgyMTdmOWFmMWMzMQ=="
+    }
+  ],
+  "full_type6_dispatch_executed": true,
+  "hash_stream_adapter": "separate original SHA1 routine execution + original uppercase hex formatter semantics",
+  "identities": [
+    {
+      "input": "NativeTest",
+      "time": "00123",
+      "encoded": "6563FBEE2951BA45E45B"
+    },
+    {
+      "input": "NativeTest",
+      "time": "91559",
+      "encoded": "DFB4EF7F9408794A92B1"
+    },
+    {
+      "input": "NativeTest",
+      "time": "21345",
+      "encoded": "302B036E41495018D15B"
+    },
+    {
+      "input": "abc123",
+      "time": "00123",
+      "encoded": "4A83240C0954"
+    },
+    {
+      "input": "abc123",
+      "time": "91559",
+      "encoded": "F0543ED3BD55"
+    },
+    {
+      "input": "abc123",
+      "time": "21345",
+      "encoded": "1F88F68DE8FD"
+    },
+    {
+      "input": "Family_Test",
+      "time": "00123",
+      "encoded": "6D63FC9726690F51CED6F9"
+    },
+    {
+      "input": "Family_Test",
+      "time": "91559",
+      "encoded": "D7B4F4B6144A3B481C6473"
+    },
+    {
+      "input": "Family_Test",
+      "time": "21345",
+      "encoded": "382A74A8EBF8712DBFBFBE"
+    }
+  ]
+}

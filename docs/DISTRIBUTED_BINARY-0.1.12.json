@@ -1,0 +1,10 @@
+{
+  "version": "0.1.12",
+  "installer_filename": "연세-iPrint-Native-0.1.12-카페용.dmg",
+  "installer_bytes": 25612440,
+  "installer_sha256": "5f319fd09cb21dbdeb810e5b928ef2f23436db25bb8e6584d7131a7aab4d0983",
+  "native_source": "../native",
+  "bundled_ghostscript_version": "10.0.0",
+  "source_archive_sha256": "a57764d70caf85e2fc0b0f59b83b92e25775631714dcdb97cc6e0cea414bb5a3",
+  "native_core_files_byte_identical_to_distributed_source": true
+}

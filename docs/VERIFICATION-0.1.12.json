@@ -1,0 +1,277 @@
+{
+  "date": "2026-10-18",
+  "source_release": "0.1.12",
+  "standalone_ghostscript_source_build_succeeded": true,
+  "native_app_build_and_signature_verified": true,
+  "packaging_script_dmg_checksum_verified": true,
+  "source_audit": {
+    "all_upstream_files_preserved": true,
+    "upstream_regular_files": 8212,
+    "upstream_regular_bytes": 191177162,
+    "all_original_native_files_preserved": true,
+    "native_source_mapping": {
+      "package.py": "docs/original-workspace/package.py",
+      "build.py": "docs/original-workspace/build.py",
+      "NativeCore.h": "native/NativeCore.h",
+      "RegistrationTerms.txt": "native/RegistrationTerms.txt",
+      "main.m": "native/main.m",
+      "BUILD.md": "docs/original-workspace/BUILD.md",
+      "NativeCore.m": "native/NativeCore.m",
+      "Protocol.md": "native/Protocol.md",
+      "tests/test_profile_protocol.py": "native/tests/test_profile_protocol.py",
+      "tests/test_registration_protocol.py": "native/tests/test_registration_protocol.py",
+      "tests/test_protocol.py": "native/tests/test_protocol.py",
+      "tests/oracle-vectors.json": "native/tests/oracle-vectors.json",
+      "tests/print_options_tests.m": "native/tests/print_options_tests.m",
+      "tests/registration_core_tests.m": "native/tests/registration_core_tests.m",
+      "tests/test_print_options.py": "native/tests/test_print_options.py",
+      "tests/print_flow_harness.m": "native/tests/print_flow_harness.m"
+    },
+    "personal_local_path_scan_passed": true,
+    "included_credentials": "synthetic NativeTest fixtures only",
+    "real_account_files_or_logs_copied": false
+  },
+  "tests": {
+    "vectors": {
+      "passed": true,
+      "architecture": "arm64",
+      "passwordVectors": 7,
+      "identityVectors": 9
+    },
+    "test_protocol": {
+      "all_passed": true,
+      "cases": [
+        {
+          "case": "success",
+          "upload": false,
+          "passed": true
+        },
+        {
+          "case": "success",
+          "upload": true,
+          "passed": true,
+          "metadata_size": 231,
+          "record_bytes": 1057,
+          "document_bytes": 70000
+        },
+        {
+          "case": "mixed-case",
+          "upload": false,
+          "passed": true
+        },
+        {
+          "case": "bad-greeting",
+          "upload": false,
+          "passed": true
+        },
+        {
+          "case": "bad-password",
+          "upload": false,
+          "passed": true
+        },
+        {
+          "case": "wrong-user",
+          "upload": false,
+          "passed": true
+        },
+        {
+          "case": "bad-field",
+          "upload": false,
+          "passed": true
+        },
+        {
+          "case": "short-response",
+          "upload": false,
+          "passed": true
+        },
+        {
+          "case": "reject-record",
+          "upload": true,
+          "passed": true,
+          "metadata_size": 231,
+          "record_bytes": 1057,
+          "document_bytes": 70000
+        },
+        {
+          "case": "reject-chunk",
+          "upload": true,
+          "passed": true,
+          "metadata_size": 231,
+          "record_bytes": 1057,
+          "document_bytes": 70000
+        },
+        {
+          "case": "reject-final",
+          "upload": true,
+          "passed": true,
+          "metadata_size": 231,
+          "record_bytes": 1057,
+          "document_bytes": 70000
+        },
+        {
+          "case": "drop-final",
+          "upload": true,
+          "passed": true,
+          "metadata_size": 231,
+          "record_bytes": 1057,
+          "document_bytes": 70000
+        }
+      ],
+      "school_network_contacted": false,
+      "credentials": "synthetic only"
+    },
+    "test_registration_protocol": {
+      "passed": true,
+      "school_network_contacted": false,
+      "cases": [
+        {
+          "case": "success",
+          "passed": true,
+          "create_requests": 1
+        },
+        {
+          "case": "duplicate",
+          "passed": true,
+          "create_requests": 0
+        },
+        {
+          "case": "duplicate-handshake-rejected",
+          "passed": true,
+          "create_requests": 0
+        },
+        {
+          "case": "insert-handshake-rejected",
+          "passed": true,
+          "create_requests": 0
+        },
+        {
+          "case": "insert-rejected",
+          "passed": true,
+          "create_requests": 1
+        },
+        {
+          "case": "insert-response-lost",
+          "passed": true,
+          "create_requests": 1
+        },
+        {
+          "case": "name-mismatch",
+          "passed": true,
+          "create_requests": 1
+        }
+      ]
+    },
+    "test_profile_protocol": {
+      "passed": true,
+      "synthetic_only": true,
+      "cases": [
+        {
+          "case": "read-only",
+          "passed": true,
+          "update_requests": 0
+        },
+        {
+          "case": "get-rejected",
+          "passed": true,
+          "update_requests": 0
+        }
+      ]
+    },
+    "registration_core": {
+      "passed": true,
+      "checks": 27,
+      "synthetic_only": true
+    },
+    "print_options": {
+      "passed": true,
+      "cases": [
+        {
+          "mode": 0,
+          "copies": 1,
+          "pages": 3,
+          "total_page_images": 3,
+          "passed": true
+        },
+        {
+          "mode": 1,
+          "copies": 1,
+          "pages": 3,
+          "total_page_images": 3,
+          "passed": true
+        },
+        {
+          "mode": 2,
+          "copies": 1,
+          "pages": 3,
+          "total_page_images": 3,
+          "passed": true
+        },
+        {
+          "mode": 0,
+          "copies": 2,
+          "pages": 3,
+          "total_page_images": 6,
+          "passed": true
+        },
+        {
+          "mode": 1,
+          "copies": 2,
+          "pages": 3,
+          "total_page_images": 6,
+          "passed": true
+        },
+        {
+          "mode": 2,
+          "copies": 2,
+          "pages": 3,
+          "total_page_images": 6,
+          "passed": true
+        },
+        {
+          "mode": 0,
+          "copies": 99,
+          "pages": 3,
+          "total_page_images": 297,
+          "passed": true
+        },
+        {
+          "mode": 1,
+          "copies": 99,
+          "pages": 3,
+          "total_page_images": 297,
+          "passed": true
+        },
+        {
+          "mode": 2,
+          "copies": 99,
+          "pages": 3,
+          "total_page_images": 297,
+          "passed": true
+        }
+      ],
+      "actual_postscript_execution": true,
+      "school_network_contacted": false,
+      "physical_print_verified": false
+    },
+    "print_options_core_checks": 42,
+    "system_libraries_only": {
+      "client": [
+        "/System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa",
+        "/System/Library/Frameworks/PDFKit.framework/Versions/A/PDFKit",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+        "/usr/lib/libobjc.A.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+      ],
+      "ghostscript": [
+        "/usr/lib/libSystem.B.dylib",
+        "/usr/lib/libiconv.2.dylib"
+      ]
+    },
+    "school_network_contacted": false
+  },
+  "github_upload_performed": false,
+  "school_network_contacted": false
+}
