@@ -1,39 +1,39 @@
-# GitHub에 올리기
+# GitHub 소스와 설치본 공유
 
-이 폴더는 로컬 Git 저장소로 초기화되어 있고 공개할 소스가 스테이징되어 있습니다.
-원격 저장소 연결이나 GitHub 업로드는 하지 않았습니다.
-`build/`, `dist/`, 캐시와 개인 설정 파일은 커밋 대상에서 제외됩니다.
-원본 Ghostscript 안의 `.gitignore` 때문에 소스가 빠지지 않도록 전체 원본을
-명시적으로 스테이징했습니다. 초기 상태에서 `git reset`으로 스테이징을 취소했다면
-다시 `git add -f third_party/ghostscript-10.0.0`도 실행하세요.
+공개 소스 저장소: [jinh0park/yonsei-iprint-unofficial](https://github.com/jinh0park/yonsei-iprint-unofficial)
 
-1. 개인 GitHub 계정에 **공개(Public)** 빈 저장소를 만듭니다.
-   이 폴더에 README와 라이선스가 있으므로 GitHub에서 같은 파일을 새로 만들 필요는 없습니다.
-2. 이 폴더에서 아래 명령을 실행합니다. `YOUR-USER`와 저장소 이름을 실제 값으로 바꾸세요.
+- `main`: 최신 소스 및 사용 안내·현장 검증 기록
+- `v0.1.14`: 배포한 0.1.14 앱에 대응하는 원래 소스 태그
 
-```sh
-git status --short
-git commit -m "Publish v0.1.14 corresponding source"
-git tag v0.1.14
-git remote add origin https://github.com/YOUR-USER/yonsei-iprint.git
-git push -u origin main
-git push origin v0.1.14
-```
-
-Git이 이름과 이메일 설정을 요청하면 본인이 사용할 커밋 작성자 정보로 설정한 뒤
-커밋하면 됩니다. 이 폴더를 준비하면서 작성자나 원격 주소를 임의로 지정하지 않았습니다.
+기존 버전 태그는 보존합니다. 같은 실행파일에 대한 후속 검증 결과와 문서 변경은
+`main`에 기록하며, 앱 코드를 변경해 새 버전을 배포하면 해당 버전의 소스 태그도 만듭니다.
+현재 원격 이름은 `origin`이고 작업 브랜치는 `main`입니다.
 
 ## 카페 게시글
 
-설치용 `연세-iPrint-Native-0.1.14-비공식-카페용.dmg` 하나를 첨부하고,
-실제 공개 저장소의 이 버전 링크를 다음처럼 안내하세요.
+설치용 `연세-iPrint-Native-0.1.14-비공식-카페용.dmg`를 첨부하고,
+다음과 같이 같은 버전의 전체 소스 링크를 안내하세요.
 
-> 버전 0.1.14 전체 소스 코드·수정사항·빌드 방법 및 라이선스:
-> https://github.com/YOUR-USER/yonsei-iprint/tree/v0.1.14
+> 개인 제작 비공식 Mac 호환 클라이언트입니다.
+> 버전 0.1.14 전체 소스 코드·Ghostscript 원본·수정사항·빌드 방법 및 라이선스:
+> https://github.com/jinh0park/yonsei-iprint-unofficial/tree/v0.1.14
+> 최신 사용 안내·현장 검증 기록:
+> https://github.com/jinh0park/yonsei-iprint-unofficial
 
-위 URL은 예시입니다. 올린 뒤 로그인하지 않은 상태에서도 해당 링크에서
-전체 소스를 내려받을 수 있는지 확인하고 제공 상태를 유지하세요.
-일반 사용자는 소스를 별도로 내려받지 않아도 설치할 수 있습니다.
+일반 사용자는 설치를 위해 소스를 별도로 내려받지 않아도 됩니다.
+전체 소스가 로그인 없이 무료로 제공되는지 확인하고 제공 상태를 유지하세요.
+`docs/DISTRIBUTED_BINARY.json`에서 설치파일의 이름·크기·SHA-256을 확인할 수 있습니다.
 
-GitHub에서는 앱 설치파일이나 중간 빌드 결과를 이 저장소에 커밋하지 않아도 됩니다.
-`docs/DISTRIBUTED_BINARY.json`에는 기존 카페용 설치 DMG의 버전·크기·해시를 기록했습니다.
+## 소스를 갱신할 때
+
+`build/`, `dist/`, 캐시와 개인 설정 파일은 커밋하지 않습니다.
+Ghostscript 원본 안의 `.gitignore`에 걸리는 파일도 있으므로 원본 자료를 새로 추가할 때는
+필요한 파일이 모두 추적되는지 확인하세요. 전체 소스 목록의 해시도 함께 갱신한 뒤
+`python3 tools/check_source.py`와 `git diff --check`로 확인합니다.
+
+```sh
+git status --short
+git diff --cached
+git commit -m "Describe the source or documentation update"
+git push origin main
+```
