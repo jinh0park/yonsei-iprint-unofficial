@@ -241,7 +241,18 @@ NSArray<NSDictionary *> *IPWaitJobs(NSData *response) {
     }
     return jobs;
 }
-@implementation IPConnection { int _fd; NSString *_localAddress; BOOL _registrationMayHaveBeenSent; }
+// Only protocol status tokens are safe to display. Never echo arbitrary server text:
+// an unexpected response could include account data or a database error.
+static NSString *registrationReplyCode(NSString *reply) {
+    if(!reply)return @"응답 수신 실패";
+    NSArray *parts=[reply.uppercaseString componentsSeparatedByString:@":"];
+    NSSet *commands=[NSSet setWithArray:@[@"USERDUP",@"IDUSE",@"ADDUSER",@"ADDUSERINS"]];
+    NSSet *statuses=[NSSet setWithArray:@[@"OK",@"NO",@"ERROR",@"ERR",@"FAIL",@"FAILED",@"DENIED",@"DUPLICATE",@"EXIST",@"EXISTS",@"REJECT",@"REJECTED",@"INVALID",@"BUSY"]];
+    if(parts.count>=2 && [commands containsObject:parts[0]] && [statuses containsObject:parts[1]])
+        return [NSString stringWithFormat:@"%@:%@",parts[0],parts[1]];
+    return reply.length ? @"비표준 응답 (개인정보 보호를 위해 내용 생략)" : @"빈 응답";
+}
+@implementation IPConnection { int _fd; NSString *_localAddress,*_serverEndpoint; BOOL _registrationMayHaveBeenSent; }
 - (BOOL)registrationMayHaveBeenSent {return _registrationMayHaveBeenSent;}
 - (instancetype)initWithHost:(NSString*)host port:(uint16_t)port {
     if((self=[super init])) {
@@ -259,6 +270,9 @@ NSArray<NSDictionary *> *IPWaitJobs(NSData *response) {
         struct sockaddr_in addr;socklen_t len=sizeof addr;char b[INET_ADDRSTRLEN]={0};
         if(!getsockname(_fd,(struct sockaddr*)&addr,&len))inet_ntop(AF_INET,&addr.sin_addr,b,sizeof b);
         _localAddress=@(b);
+        len=sizeof addr;memset(b,0,sizeof b);
+        if(!getpeername(_fd,(struct sockaddr*)&addr,&len) && inet_ntop(AF_INET,&addr.sin_addr,b,sizeof b))
+            _serverEndpoint=[NSString stringWithFormat:@"%s:%u",b,ntohs(addr.sin_port)];
     }return self;
 }
 - (NSString*)localAddress{return _localAddress ?: @"";}
@@ -290,18 +304,28 @@ NSArray<NSDictionary *> *IPWaitJobs(NSData *response) {
 }
 - (void)registerUser:(NSString*)user password:(NSString*)password profile:(NSDictionary*)profile {
     NSData *request=IPRegistrationRequest(user,password,currentSalt(),profile);
-    [self write:ascii(@"USERDUP:COMMAND\r\n")];
-    if(![[[self line] uppercaseString] isEqualToString:@"USERDUP:OK"])IPFail(@"서버가 ID 확인 요청을 승인하지 않았습니다.");
-    [self write:request];
-    if(![[[self line] uppercaseString] isEqualToString:@"IDUSE:OK"])IPFail(@"서버가 이 ID의 사용을 승인하지 않았습니다. 이미 가입된 ID이거나 다른 제한이 있을 수 있습니다. 가입 요청은 보내지 않았습니다.");
-    // The original uses both commands on the SAME connection and SAME record.
-    [self write:ascii(@"USERINS:COMMAND\r\n")];
-    if(![[[self line] uppercaseString] isEqualToString:@"ADDUSER:OK"])IPFail(@"서버가 회원가입 요청을 승인하지 않았습니다.");
-    _registrationMayHaveBeenSent=YES;
+    NSString *stage=@"R1 · ID 검사 시작",*reply=nil;
     @try {
+        [self write:ascii(@"USERDUP:COMMAND\r\n")];reply=[self line];
+        if(![reply.uppercaseString isEqualToString:@"USERDUP:OK"])IPFail(@"서버가 ID 확인 요청을 승인하지 않았습니다.");
+        stage=@"R2 · ID 사용 가능 확인";reply=nil;
         [self write:request];
-        if(![[[self line] uppercaseString] isEqualToString:@"ADDUSERINS:OK"])IPFail(@"서버가 가입 완료 응답을 보내지 않았습니다.");
-    }@catch(NSException *e){IPFail([e.reason stringByAppendingString:@"\n가입 여부가 불확실합니다. 같은 정보로 자동 재시도하지 않습니다. 창을 닫고 새 ID로 로그인해 먼저 확인해 주세요."]);}
+        reply=[self line];
+        if(![reply.uppercaseString isEqualToString:@"IDUSE:OK"])IPFail(@"서버가 이 ID의 사용을 승인하지 않았습니다. 이미 가입된 ID이거나 다른 제한이 있을 수 있습니다. 가입 요청은 보내지 않았습니다.");
+        // The original uses both commands on the SAME connection and SAME record.
+        stage=@"R3 · 가입 요청 시작";reply=nil;
+        [self write:ascii(@"USERINS:COMMAND\r\n")];reply=[self line];
+        if(![reply.uppercaseString isEqualToString:@"ADDUSER:OK"])IPFail(@"서버가 회원가입 요청을 승인하지 않았습니다.");
+        stage=@"R4 · 가입 정보 저장";reply=nil;
+        _registrationMayHaveBeenSent=YES;
+        [self write:request];reply=[self line];
+        if(![reply.uppercaseString isEqualToString:@"ADDUSERINS:OK"])IPFail(@"서버에서 가입 저장의 성공 응답을 받지 못했습니다.");
+    }@catch(NSException *e){
+        NSString *version=[NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] ?: @"개발용";
+        NSString *message=[NSString stringWithFormat:@"%@\n\n단계: %@\n응답: %@\n접속 서버: %@\n앱: %@",e.reason,stage,registrationReplyCode(reply),_serverEndpoint ?: @"확인 불가",version];
+        if(_registrationMayHaveBeenSent)message=[message stringByAppendingString:@"\n\n가입 여부가 불확실합니다. 자동 재시도하지 않습니다. 창을 닫고 방금 사용한 ID로 로그인해 먼저 확인해 주세요."];
+        IPFail(message);
+    }
 }
 - (NSArray<NSDictionary *>*)waitJobsForUser:(NSString*)user {
     NSData *request=IPWaitQueueRequest(user,currentSalt());

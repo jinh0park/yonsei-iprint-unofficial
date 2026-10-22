@@ -26,6 +26,10 @@ def case(mode):
     c.sendall(b'AddUser:Ok\r\n');assert exact(c,471)==r;writes.append(True)
     if mode=='insert-response-lost':return
     if mode=='insert-rejected':c.sendall(b'ADDUSERINS:NO\r\n');return
+    if mode=='insert-error':c.sendall(b'AddUserIns:Error\r\n');return
+    if mode=='insert-empty':c.sendall(b'\r\n');return
+    if mode=='insert-private-response':c.sendall(b'ADDUSERINS:private-person@example.com Native-Test-17\r\n');return
+    if mode=='insert-private-detail':c.sendall(b'ADDUSERINS:ERROR:private-person@example.com Native-Test-17\r\n');return
     fragmented(c,b'AddUserIns:Ok\r\n')
    c,_=server.accept()
    with c:
@@ -39,7 +43,13 @@ def case(mode):
  assert not t.is_alive() and not errors,(mode,errors,r.stdout,r.stderr)
  value=json.loads(r.stdout);assert value['success']==(mode=='success'),(mode,value)
  if mode in ['duplicate','duplicate-handshake-rejected','insert-handshake-rejected']:assert not writes and not value['registrationMayHaveBeenSent']
- if mode in ['insert-rejected','insert-response-lost']:assert len(writes)==1 and value['registrationMayHaveBeenSent'] and '가입 여부가 불확실' in value['error']
+ if mode in ['insert-rejected','insert-response-lost','insert-error','insert-empty','insert-private-response','insert-private-detail']:
+  assert len(writes)==1 and value['registrationMayHaveBeenSent'] and '가입 여부가 불확실' in value['error']
+  assert 'R4' in value['error'] and '접속 서버: 127.0.0.1:' in value['error'] and '앱: ' in value['error']
+  expected={'insert-rejected':'ADDUSERINS:NO','insert-response-lost':'응답 수신 실패','insert-error':'ADDUSERINS:ERROR','insert-empty':'빈 응답','insert-private-response':'비표준 응답','insert-private-detail':'ADDUSERINS:ERROR'}
+  assert expected[mode] in value['error'],value
+  assert all(secret not in value['error'] for secret in ['NativeTest','Native-Test-17','private-person@example.com','01012345678','가나다'])
+ if mode=='duplicate':assert 'R2' in value['error'] and 'IDUSE:NO' in value['error']
  if mode=='name-mismatch':assert 'name read-back mismatch' in value['error']
  return {'case':mode,'passed':True,'create_requests':len(writes)}
-if __name__=='__main__':print(json.dumps({'passed':True,'school_network_contacted':False,'cases':[case(x) for x in ['success','duplicate','duplicate-handshake-rejected','insert-handshake-rejected','insert-rejected','insert-response-lost','name-mismatch']]},indent=2))
+if __name__=='__main__':print(json.dumps({'passed':True,'school_network_contacted':False,'cases':[case(x) for x in ['success','duplicate','duplicate-handshake-rejected','insert-handshake-rejected','insert-rejected','insert-response-lost','insert-error','insert-empty','insert-private-response','insert-private-detail','name-mismatch']]},indent=2))

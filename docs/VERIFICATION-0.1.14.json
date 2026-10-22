@@ -1,0 +1,12 @@
+{
+  "version": "0.1.14",
+  "change": "Unofficial name in Finder, Info.plist, window title and app menu",
+  "protocol_and_print_handlers_changed": false,
+  "previous_protocol_validation": "VERIFICATION-0.1.13.json",
+  "school_queue_interoperability_verified": true,
+  "physical_duplex_and_multiple_copy_billing_verified": true,
+  "field_verification_source": "user_report",
+  "field_verification_reported_on": "2026-10-18",
+  "school_network_contacted_by_agent": false,
+  "field_verification_details": "FIELD_VALIDATION.json"
+}

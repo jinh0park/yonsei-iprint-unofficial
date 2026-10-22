@@ -1,13 +1,28 @@
 {
   "display_name": "연세 iPrint Native (비공식)",
-  "version": "0.1.14",
-  "installer_filename": "연세-iPrint-Native-0.1.14-비공식-카페용.dmg",
-  "installer_bytes": 25621993,
-  "installer_sha256": "a812aad067aa03a956aeac9f744d3f55c895c1b73b2a07e99e4d4be5745e6a5b",
+  "version": "0.1.15",
+  "build": "16",
+  "diagnostic_release": true,
+  "installer_filename": "연세-iPrint-Native-0.1.15-비공식-공증.dmg",
+  "installer_bytes": 25541425,
+  "installer_sha256": "983756730be8219a29fdd840a6ebdc3676f9b68336adbf57d9929768b2b72963",
   "native_source": "../native",
   "bundled_ghostscript_version": "10.0.0",
-  "native_core_files_byte_identical_to_distributed_source": true,
-  "school_queue_interoperability_verified": true,
-  "field_verification_source": "user_report",
-  "field_verification_reported_on": "2026-10-18"
+  "native_source_files_byte_identical_to_distributed_source": true,
+  "developer_id_signed": true,
+  "apple_notarized": true,
+  "notarization": {
+    "app": {
+      "id": "bc1fbfe9-4a5d-459b-8f46-98dd2f2d0fae",
+      "status": "Accepted",
+      "stapled": true
+    },
+    "dmg": {
+      "id": "a1591d35-0b20-487f-b1d7-b7f520f6982c",
+      "status": "Accepted",
+      "stapled": true
+    }
+  },
+  "field_validation_of_previous_features": "FIELD_VALIDATION.json",
+  "signup_failure_root_cause_unresolved": true
 }

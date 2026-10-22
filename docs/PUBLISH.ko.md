@@ -3,7 +3,8 @@
 공개 소스 저장소: [jinh0park/yonsei-iprint-unofficial](https://github.com/jinh0park/yonsei-iprint-unofficial)
 
 - `main`: 최신 소스 및 사용 안내·현장 검증 기록
-- `v0.1.14`: 배포한 0.1.14 앱에 대응하는 원래 소스 태그
+- `v0.1.14`: 기존 0.1.14 앱에 대응하는 소스 태그(보존)
+- `v0.1.15`: 회원가입 오류 진단판에 대응하는 소스 태그
 
 기존 버전 태그는 보존합니다. 같은 실행파일에 대한 후속 검증 결과와 문서 변경은
 `main`에 기록하며, 앱 코드를 변경해 새 버전을 배포하면 해당 버전의 소스 태그도 만듭니다.
@@ -11,12 +12,12 @@
 
 ## 카페 게시글
 
-설치용 `연세-iPrint-Native-0.1.14-비공식-카페용.dmg`를 첨부하고,
+설치용 `연세-iPrint-Native-0.1.15-비공식-공증.dmg`를 첨부하고,
 다음과 같이 같은 버전의 전체 소스 링크를 안내하세요.
 
 > 개인 제작 비공식 Mac 호환 클라이언트입니다.
-> 버전 0.1.14 전체 소스 코드·Ghostscript 원본·수정사항·빌드 방법 및 라이선스:
-> https://github.com/jinh0park/yonsei-iprint-unofficial/tree/v0.1.14
+> 버전 0.1.15 전체 소스 코드·Ghostscript 원본·수정사항·빌드 방법 및 라이선스:
+> https://github.com/jinh0park/yonsei-iprint-unofficial/tree/v0.1.15
 > 최신 사용 안내·현장 검증 기록:
 > https://github.com/jinh0park/yonsei-iprint-unofficial
 

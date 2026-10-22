@@ -1,0 +1,13 @@
+{
+  "display_name": "연세 iPrint Native (비공식)",
+  "version": "0.1.14",
+  "installer_filename": "연세-iPrint-Native-0.1.14-비공식-카페용.dmg",
+  "installer_bytes": 25621993,
+  "installer_sha256": "a812aad067aa03a956aeac9f744d3f55c895c1b73b2a07e99e4d4be5745e6a5b",
+  "native_source": "../native",
+  "bundled_ghostscript_version": "10.0.0",
+  "native_core_files_byte_identical_to_distributed_source": true,
+  "school_queue_interoperability_verified": true,
+  "field_verification_source": "user_report",
+  "field_verification_reported_on": "2026-10-18"
+}

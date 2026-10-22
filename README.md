@@ -1,11 +1,12 @@
 # 연세 iPrint Native (비공식)
 
-Apple Silicon Mac용 개인 제작 비공식 아이프린트 클라이언트의 **0.1.14 소스 배포본**입니다.
+Apple Silicon Mac용 개인 제작 비공식 아이프린트 클라이언트의 **0.1.15 소스 배포본**입니다.
 macOS 15 이상과 연세대 캠퍼스 네트워크에서 사용합니다. 학교·아이프린트·삼성의 공식 앱은 아닙니다.
 
 PDF 첫 장 미리보기, 로그인·로그아웃, 회원가입, 읽기 전용 회원정보 확인,
 A4 흑백 인쇄, 단면·양면 방향 선택과 1~99부 설정을 제공합니다.
 서버 대기 문서 조회·새로고침·선택 삭제도 제공합니다.
+0.1.15는 회원가입 실패 단계·허용된 서버 응답 코드·접속 서버를 표시하는 진단판입니다. 가입 실패의 원인을 수정했다고 확인된 버전은 아닙니다.
 PDF를 글자 외곽선 변환 및 압축한 뒤 인쇄 서버로 보냅니다.
 
 일반 사용자는 소스를 빌드할 필요 없이 별도로 제공된 설치 DMG를 받으면 됩니다.
@@ -15,7 +16,7 @@ PDF를 글자 외곽선 변환 및 압축한 뒤 인쇄 서버로 보냅니다.
 
 | 경로 | 내용 |
 |---|---|
-| `native/` | 배포한 0.1.14 앱 소스와 합성 입력용 검사 코드 |
+| `native/` | 배포한 0.1.15 앱 소스와 합성 입력용 검사 코드 |
 | `third_party/ghostscript-10.0.0/` | 생략 없이 보존한 Ghostscript 10.0.0 원본 전체 |
 | `patches/ghostscript/` | Mac에서 빌드하기 위해 수정한 두 파일 |
 | `assets/AppIcon.icns` | 앱 빌드에 필요한 아이콘 |
@@ -46,7 +47,7 @@ python3 tools/build.py --jobs 4
 같은 입력으로 다시 실행하면 완료된 Ghostscript 빌드를 재사용합니다.
 다시 빌드하려면 `--force-ghostscript`를 지정합니다.
 
-앱은 ad-hoc 서명되며 Apple Developer ID 서명·공증은 하지 않습니다.
+이 빌드 스크립트는 앱을 ad-hoc 서명합니다. 별도로 제공하는 공증 DMG는 개발자 배포 과정에서 Developer ID 서명·Apple 공증을 추가로 적용합니다.
 소스가 같아도 컴파일러·SDK·빌드 시각 때문에 기존 배포 바이너리와 바이트 단위로
 동일한 결과를 보장하지 않습니다. 앱 실행에는 Python, Wine, Rosetta가 필요 없습니다.
 
@@ -102,10 +103,10 @@ Ghostscript와 그 안의 타사 라이브러리·폰트·문서는 각 원본 �
 게시글 예시와 GitHub 업로드 순서는 [PUBLISH.ko.md](docs/PUBLISH.ko.md)에 있습니다.
 
 공개 소스 URL을 명시한 새 설치 DMG를 만들려면 다음처럼 실행합니다.
-아래 URL은 배포한 0.1.14 코드에 대응하는 공개 소스 태그입니다.
+아래 URL은 배포한 0.1.15 코드에 대응하는 공개 소스 태그입니다.
 현장 검증 등 후속 문서 갱신은 main 브랜치에 기록합니다.
 
 ```sh
 python3 tools/package.py \
-  --source-url 'https://github.com/jinh0park/yonsei-iprint-unofficial/tree/v0.1.14'
+  --source-url 'https://github.com/jinh0park/yonsei-iprint-unofficial/tree/v0.1.15'
 ```
